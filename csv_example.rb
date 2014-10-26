@@ -7,6 +7,9 @@ csv = CSV.parse(csv_text, headers: true)
 CSV.foreach("numbers.csv", headers: true, converters: :numeric) do |row|
   @headers << row.to_hash
 end
-p @headers
+@headers.each do |row|
+  p row.sort
+end
+
 
 

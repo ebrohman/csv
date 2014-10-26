@@ -1,15 +1,15 @@
 require 'CSV'
 
-csv_text = File.read("numbers.csv")
-csv = CSV.parse(csv_text, headers: true)
-@rows = []
-@headers = []
-CSV.foreach("numbers.csv", headers: true, converters: :numeric) do |row|
-  @headers << row.to_hash
+CSV.open("new_numbers.csv", "w", :headers => true) do |csv|
+  CSV.foreach("numbers.csv", headers: :true, converters: :numeric) do |obj|
+    csv << obj.headers.sort
+    values = Hash[obj.sort].values
+    csv << values
+  end
 end
-@headers.each do |row|
-  p row.sort
-end
+
+
+
 
 
 

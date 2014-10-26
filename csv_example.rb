@@ -1,11 +1,12 @@
 require 'CSV'
 
 csv_text = File.read("numbers.csv")
-csv = CSV.parse(csv_text)
+csv = CSV.parse(csv_text, headers: true)
 @rows = []
-csv.each do |row|
-   @rows << row.each {|x| x.sub! /\A0+/, ''}
+@headers = []
+CSV.foreach("numbers.csv", headers: true, converters: :numeric) do |row|
+  @headers << row.to_hash
 end
+p @headers
 
-p @rows
 
